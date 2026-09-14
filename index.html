@@ -72,6 +72,92 @@
     transition:background .2s ease;
   }
   .nav-cta:hover{background:var(--sand-300);}
+  .nav-right{display:flex;align-items:center;gap:14px;}
+  .menu-toggle{
+    width:42px;height:42px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:5px;
+    background:transparent;
+    border:1px solid rgba(246,244,238,0.3);
+    border-radius:2px;
+    cursor:pointer;
+    flex-shrink:0;
+  }
+  .menu-toggle span{
+    width:18px;height:1.5px;
+    background:var(--paper);
+    display:block;
+    transition:transform .25s ease, opacity .25s ease;
+  }
+  .menu-toggle.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+  .menu-toggle.open span:nth-child(2){opacity:0;}
+  .menu-toggle.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+  .menu-overlay{
+    position:fixed;inset:0;
+    background:rgba(10,25,48,0.55);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity .3s ease;
+    z-index:90;
+  }
+  .menu-overlay.open{opacity:1;pointer-events:auto;}
+
+  .side-menu{
+    position:fixed;
+    top:0;right:0;
+    height:100%;
+    width:min(78%,320px);
+    background:var(--navy-900);
+    border-left:1px solid var(--line-dark);
+    z-index:95;
+    transform:translateX(100%);
+    transition:transform .32s ease;
+    padding:32px 28px;
+    display:flex;
+    flex-direction:column;
+  }
+  .side-menu.open{transform:translateX(0);}
+  .side-menu-close{
+    align-self:flex-end;
+    width:36px;height:36px;
+    border:1px solid rgba(246,244,238,0.3);
+    background:transparent;
+    color:var(--paper);
+    font-size:1.1rem;
+    border-radius:2px;
+    cursor:pointer;
+    margin-bottom:36px;
+  }
+  .side-menu-links{
+    list-style:none;
+    display:flex;
+    flex-direction:column;
+  }
+  .side-menu-links li{
+    border-bottom:1px solid var(--line-dark);
+  }
+  .side-menu-links a{
+    display:block;
+    padding:18px 2px;
+    font-family:'Fraunces',serif;
+    font-size:1.2rem;
+    color:var(--paper);
+    transition:color .2s ease;
+  }
+  .side-menu-links a:hover{color:var(--sand-300);}
+  .side-menu-cta{
+    margin-top:auto;
+    background:var(--sand-400);
+    color:var(--navy-900);
+    text-align:center;
+    padding:14px;
+    font-weight:500;
+    border-radius:2px;
+  }
 
   /* ---------- HERO ---------- */
   .hero{
@@ -367,9 +453,27 @@
 <nav class="nav">
   <div class="wrap">
     <div class="nav-name">Dr. Daniel <span>Oliveira</span></div>
-    <a href="https://wa.me/5583988014242" class="nav-cta" target="_blank" rel="noopener">Agendar consulta</a>
+    <div class="nav-right">
+      <a href="https://wa.me/5583988014242" class="nav-cta" target="_blank" rel="noopener">Agendar consulta</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
   </div>
 </nav>
+
+<div class="menu-overlay" id="menuOverlay"></div>
+<aside class="side-menu" id="sideMenu">
+  <button class="side-menu-close" id="menuClose" aria-label="Fechar menu">✕</button>
+  <ul class="side-menu-links">
+    <li><a href="#sobre" class="side-link">Sobre</a></li>
+    <li><a href="#sobre" class="side-link">Especialidades</a></li>
+    <li><a href="#para-quem" class="side-link">Para quem é</a></li>
+    <li><a href="#atendimento" class="side-link">Como funciona</a></li>
+    <li><a href="#contato" class="side-link">Localização</a></li>
+  </ul>
+  <a href="https://wa.me/5583988014242" class="side-menu-cta" target="_blank" rel="noopener">Agendar consulta</a>
+</aside>
 
 <header class="hero">
   <div class="wrap hero-grid">
@@ -422,7 +526,7 @@
   </div>
 </section>
 
-<section class="para-quem">
+<section class="para-quem" id="para-quem">
   <div class="wrap pq-grid">
     <div>
       <h2>Esse acompanhamento é <em>para você</em> se você sente que:</h2>
@@ -496,5 +600,33 @@
   </div>
 </footer>
 
+<script>
+  (function(){
+    const toggle = document.getElementById('menuToggle');
+    const closeBtn = document.getElementById('menuClose');
+    const overlay = document.getElementById('menuOverlay');
+    const menu = document.getElementById('sideMenu');
+    const links = document.querySelectorAll('.side-link');
+
+    function openMenu(){
+      menu.classList.add('open');
+      overlay.classList.add('open');
+      toggle.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMenu(){
+      menu.classList.remove('open');
+      overlay.classList.remove('open');
+      toggle.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    toggle.addEventListener('click', function(){
+      menu.classList.contains('open') ? closeMenu() : openMenu();
+    });
+    closeBtn.addEventListener('click', closeMenu);
+    overlay.addEventListener('click', closeMenu);
+    links.forEach(function(a){ a.addEventListener('click', closeMenu); });
+  })();
+</script>
 </body>
 </html>
