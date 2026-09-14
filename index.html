@@ -89,6 +89,24 @@
   .hero-grid{
     display:block;
   }
+  .hero-eyebrow{
+    color:var(--sand-300);
+    font-size:0.95rem;
+    margin-bottom:22px;
+    max-width:520px;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem,5vw,3.9rem);
+    max-width:660px;
+    margin-bottom:26px;
+  }
+  .hero-lede{
+    font-size:1.12rem;
+    line-height:1.6;
+    color:rgba(246,244,238,0.88);
+    max-width:520px;
+    margin-bottom:40px;
+  }
   @media(max-width:900px){
     .hero{
       display:flex;
@@ -128,29 +146,29 @@
       font-size:0.78rem;
     }
     .hero h1{
-      font-size:clamp(1.15rem,5.6vw,1.4rem);
-      max-width:230px;
+      font-size:clamp(1.32rem,6.4vw,1.62rem);
+      max-width:260px;
       margin-left:auto;
-      margin-bottom:14px;
-      line-height:1.14;
+      margin-bottom:15px;
+      line-height:1.15;
     }
     .hero-lede{
-      font-size:0.74rem;
-      line-height:1.45;
-      max-width:230px;
-      margin-bottom:20px;
+      font-size:0.83rem;
+      line-height:1.48;
+      max-width:260px;
+      margin-bottom:21px;
     }
     .hero-eyebrow{
-      font-size:0.62rem;
-      max-width:230px;
-      margin-bottom:12px;
+      font-size:0.68rem;
+      max-width:260px;
+      margin-bottom:13px;
     }
     .hero-actions{
       gap:10px;
     }
     .hero-actions .btn-primary,.hero-actions .btn-ghost{
-      padding:10px 16px;
-      font-size:0.78rem;
+      padding:10px 17px;
+      font-size:0.81rem;
     }
   }
   @media(min-width:901px){
@@ -172,27 +190,9 @@
       max-width:600px;
     }
   }
-  .hero-eyebrow{
-    color:var(--sand-300);
-    font-size:0.95rem;
-    margin-bottom:22px;
-    max-width:520px;
-  }
-  .hero h1{
-    font-size:clamp(2.4rem,5vw,3.9rem);
-    max-width:660px;
-    margin-bottom:26px;
-  }
   .hero h1 em{
     font-style:italic;
     color:var(--sand-300);
-  }
-  .hero-lede{
-    font-size:1.12rem;
-    line-height:1.6;
-    color:rgba(246,244,238,0.88);
-    max-width:520px;
-    margin-bottom:40px;
   }
   .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center;}
   .btn-primary{
